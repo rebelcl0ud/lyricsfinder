@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
 class Lyrics extends Component {
+	state = {
+		track: {},
+		lyrics: {},
+	}
+	
 	render() {
 		return (
 			<div>
