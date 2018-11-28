@@ -13,8 +13,13 @@ class Search extends Component {
 	}
 
 	// = (e) => will remove the need to place bind in input prop ex: onChange={this.onChange.bind(this)}
+	/**
+	trackTitle; if there were to be multiple input forms sep onChange for each would be >_<
+	workaround would be to swap {trackTitle: e.target.value} to {[e.target.name]: e.target.value}
+	where it will be snagging name from name prop in input below
+	**/
 	onChange = (e) => {
-		this.setState({trackTitle: e.target.value})
+		this.setState({[e.target.name]: e.target.value})
 	}
 
 	render() {
