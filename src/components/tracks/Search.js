@@ -22,16 +22,26 @@ class Search extends Component {
 		this.setState({[e.target.name]: e.target.value})
 	}
 
-	findTrack = (e) => {
+	findTrack = (dispatch, e) => {
 		e.preventDefault();
 
 		axios.get(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_track=${this.state.trackTitle}&page_size=10&page=1&s_track_rating=desc&apikey=${process.env.REACT_APP_MMKEY}`)
 			.then((res) => {
-				console.log(res.data);
+				/**
+					data fetched, put into payload which will be used as stated in context file 
+					once type is checked and matched it will return updated state, display accordingly
+				**/
+				dispatch({
+					type: 'SEARCH_TRACKS',
+					payload: res.data.message.body.track_list
+				})
+				// clears search input after form search submit
+				this.setState({trackTitle: ''})
 			})
 			.catch((err) => {
 				console.error(err);
 			})
+
 	}
 
 	render() {
@@ -39,13 +49,19 @@ class Search extends Component {
 		return (
 			<Consumer>
 			{value => {
+				// checking for dispatch fn access, placed in context, which will run when form is submitted, bind
+				// console.log(value)
+				
+				// destructuring to snag dispatch, used in form onSubmit below
+				const { dispatch } = value;
+				
 				return (
 					<div className='card card-body mb-4 p-4'>
 						<h1 className='display-4 text-center'>
 							<i className='fas fa-glasses'></i> Search for Song
 						</h1>
 						<p className='lead text-center'>Snag Lyrics</p>
-						<form onSubmit={this.findTrack}>
+						<form onSubmit={this.findTrack.bind(this, dispatch)}>
 							<div className='form-group'>
 								<input 
 									type='text' 
