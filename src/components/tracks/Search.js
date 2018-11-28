@@ -37,12 +37,13 @@ class Search extends Component {
 							<div className='form-group'>
 								<input 
 									type='text' 
-									className=' form-control form-control-lg' 
+									className=' form-control form-control-lg mb-4' 
 									placeholder='enter song'
 									name='trackTitle'
 									value={this.state.trackTitle} 
 									onChange={this.onChange}
 								/>
+								<button type='submit' className='btn btn-info btn-lg btn-block mb-5'>submit</button>
 							</div>
 						</form>
 					</div>
