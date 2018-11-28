@@ -3,6 +3,10 @@ import axios from 'axios';
 import Spinner from '../layouts/Spinner';
 // 'go back' button; link needed from react-router
 import { Link } from 'react-router-dom';
+// react-moment instead of moment
+// https://momentjs.com/
+// https://www.npmjs.com/package/react-moment
+import Moment from 'react-moment';
 
 class Lyrics extends Component {
 	// only need this data for this particular component; comp state vs app level state
@@ -56,7 +60,7 @@ class Lyrics extends Component {
 									<strong>Explicit: </strong>
 									{track.explicit === 0 ? 'No' : 'Yes'}
 								</li>
-								<li className='list-group-item'><strong>Release Date: </strong>{track.first_release_date}</li>
+								<li className='list-group-item'><strong>Release Date: </strong><Moment format='DD MMM YYYY'>{track.first_release_date}</Moment></li>
 
 							</ul>	
 						</div>
