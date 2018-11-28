@@ -22,6 +22,18 @@ class Search extends Component {
 		this.setState({[e.target.name]: e.target.value})
 	}
 
+	findTrack = (e) => {
+		e.preventDefault();
+
+		axios.get(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_track=${this.state.trackTitle}&page_size=10&page=1&s_track_rating=desc&apikey=${process.env.REACT_APP_MMKEY}`)
+			.then((res) => {
+				console.log(res.data);
+			})
+			.catch((err) => {
+				console.error(err);
+			})
+	}
+
 	render() {
 		// value snags the text as set up in context file
 		return (
@@ -33,7 +45,7 @@ class Search extends Component {
 							<i className='fas fa-glasses'></i> Search for Song
 						</h1>
 						<p className='lead text-center'>Snag Lyrics</p>
-						<form>
+						<form onSubmit={this.findTrack}>
 							<div className='form-group'>
 								<input 
 									type='text' 
