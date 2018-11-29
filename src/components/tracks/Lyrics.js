@@ -27,7 +27,7 @@ class Lyrics extends Component {
 			})
 			.then((res) => {
 				// because 2nd call is returned in prev then, another then is chained to snag results from return above
-				console.log(res.data);
+				// console.log(res.data);
 				this.setState({ track: res.data.message.body.track })
 			})
 			.catch((err) => {
@@ -55,7 +55,9 @@ class Lyrics extends Component {
 						<div className='card-footer'>
 							<ul className='list-group list-group-flush'>
 								<li className='list-group-item'><strong>Album: </strong>{track.album_name}</li>
-								<li className='list-group-item'><strong>Genre: </strong>{track.primary_genres.music_genre_list[0].music_genre.music_genre_name}</li>
+								{track.primary_genres.music_genre_list.length > 0 &&
+									<li className='list-group-item'><strong>Genre: </strong>{track.primary_genres.music_genre_list[0].music_genre.music_genre_name}</li>
+								}
 								<li className='list-group-item'>
 									<strong>Explicit: </strong>
 									{track.explicit === 0 ? 'No' : 'Yes'}
